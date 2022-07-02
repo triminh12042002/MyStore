@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/AndroidStudioProjects/MyStore/app/src/main/res/drawable/button_bg.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/MyStore/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/MyStore/app/src/main/res/layout/activity_store_items.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/MyStore/app/src/main/res/layout/item_recycler_row.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/MyStore/app/src/main/res/layout/recycler_row.xml" value="0.1" />
       </map>
     </option>
   </component>

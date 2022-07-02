@@ -1,0 +1,56 @@
+[
+    {
+        "name":"Store 1",
+        "address":"1 A Street",
+        "position": "10.7400324,106.5921973",
+        "image":"https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8",
+        "items":[
+            {
+                "name":"item1",
+                "price":"1.0",
+                "url": "https://images.unsplash.com/photo-1546548970-71785318a17b"
+            },
+            {
+                "name":"item2",
+                "price":"2.0",
+                "url": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/7/17/1/FN_Simple-Spaghetti-with-Tomato-Sauce_s4x3.jpg.rend.hgtvcom.826.620.suffix/1408069256188.jpeg"
+            }
+        ]
+    },
+    {
+        "name":"Store 2",
+        "address":"2 B Street",
+        "position": "10.7464412,106.6177748",
+        "image":"https://images.unsplash.com/photo-1583639178752-6952f32692c2",
+        "items":[
+            {
+                "name":"item1",
+                "price":"1.0",
+                "url": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/7/17/1/FN_Simple-Spaghetti-with-Tomato-Sauce_s4x3.jpg.rend.hgtvcom.826.620.suffix/1408069256188.jpeg"
+            },
+            {
+                "name":"item2",
+                "price":"2.0",
+                "url": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/7/17/1/FN_Simple-Spaghetti-with-Tomato-Sauce_s4x3.jpg.rend.hgtvcom.826.620.suffix/1408069256188.jpeg"
+            }
+        ]
+    },
+    {
+        "name":"Store 2",
+        "address":"2 B Street",
+        "position": "10.7464412,106.6177748",
+        "image":"https://images.unsplash.com/photo-1547458095-8642c575ed1a",
+        "items":[
+            {
+                "name":"item1",
+                "price":"1.0",
+                "url": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/7/17/1/FN_Simple-Spaghetti-with-Tomato-Sauce_s4x3.jpg.rend.hgtvcom.826.620.suffix/1408069256188.jpeg"
+            },
+            {
+                "name":"item2",
+                "price":"2.0",
+                "url": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/7/17/1/FN_Simple-Spaghetti-with-Tomato-Sauce_s4x3.jpg.rend.hgtvcom.826.620.suffix/1408069256188.jpeg"
+            }
+        ]
+    }
+]
