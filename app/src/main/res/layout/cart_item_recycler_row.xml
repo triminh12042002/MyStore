@@ -41,44 +41,12 @@
             android:layout_marginEnd="10dp"
             />
         <TextView
-            android:id="@+id/addToCartButton"
+            android:id="@+id/itemNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="Add to cart"
-            android:background="@drawable/button_bg"
-            android:layout_margin="5dp"
             />
-        <LinearLayout
-            android:id="@+id/addToCartLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:visibility="gone"
-            android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/addButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/ic_add"
-                android:layout_gravity="center_horizontal"
-                />
-            <TextView
-                android:id="@+id/countItem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                />
-            <ImageView
-                android:id="@+id/minusButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/ic_remove"
-                android:layout_gravity="center_horizontal"
-                />
-
-        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyStore">
         <activity
+            android:name=".CartItemsActivity"
+            android:exported="false" />
+        <activity
             android:name=".StoreItemsActivity"
             android:exported="false" />
         <activity
