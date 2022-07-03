@@ -1,87 +1,92 @@
 package com.example.mystore;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.mystore.adapter.StoreListAdapter;
-import com.example.mystore.model.StoreModel;
-import com.google.gson.Gson;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import java.io.IOException;
-import java.io.InputStream;
+import com.example.mystore.model.Item;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity  implements StoreListAdapter.StoreModelListClickListener {
+public class AutoCompleteItemAdapter extends ArrayAdapter <Item> {
 
+    private List<Item> ItemListFull;
+
+    public AutoCompleteItemAdapter(@NonNull Context context, @NonNull List<Item> ItemList) {
+        super(context, 0, ItemList);
+        ItemListFull = new ArrayList<>(ItemList);
+    }
+
+    @NonNull
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Store List");
-
-        List<StoreModel> storeModelList = getStoreData();
-
-        initRecycleView(storeModelList);
-
-        TextView viewMapButton = findViewById(R.id.viewMapButton);
-        viewMapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mapIntent = new Intent(MainActivity.this, MapsActivity.class);
-                ArrayList<StoreModel> storeModelArrayList = new ArrayList<>(storeModelList);
-                mapIntent.putParcelableArrayListExtra("StoreModelList", storeModelArrayList);
-                startActivityForResult(mapIntent, 1000);
-            }
-        });
+    public Filter getFilter() {
+        return itemFilter;
     }
 
-    private void initRecycleView(List<StoreModel> storeModelList) {
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        StoreListAdapter adapter = new StoreListAdapter(storeModelList, this);
-        recyclerView.setAdapter(adapter);
-
-    }
-
-    private List<StoreModel> getStoreData() {
-//        InputStream is = getResources().openRawResource(R.raw.store);
-        // write from file to list of store
-        String jsonString = "";
-        try {
-            InputStream is = getResources().openRawResource(R.raw.store);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            jsonString = new String(buffer, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.item_autocomplete_row, parent, false
+            );
         }
-        Gson gson = new Gson();
-        StoreModel[] storeModels = gson.fromJson(jsonString, StoreModel[].class);
-        List<StoreModel> storeModelList = Arrays.asList(storeModels);
-        return storeModelList;
+
+        TextView textViewName = convertView.findViewById(R.id.text_view_name);
+        //Image imageViewFlag = convertView.findViewById(R.id.image_view_flag);
+
+        Item item = getItem(position);
+
+        if (item != null) {
+            textViewName.setText(item.getName());
+            //imageView.setImageResource(item.geImage());
+        }
+
+        return convertView;
     }
 
-    @Override
-    public void onItemClick(StoreModel storeModel) {
-        Intent intent = new Intent(MainActivity.this, StoreItemsActivity.class);
-        intent.putExtra("StoreModel",storeModel);
-        startActivity(intent);
-    }
+    private Filter itemFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            List<Item> suggestions = new ArrayList<>();
 
+            if (constraint == null || constraint.length() == 0) {
+                suggestions.addAll(ItemListFull);
+            }
+            else
+            {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Item item : ItemListFull) {
+                    if (item.getName().toLowerCase(Locale.ROOT).contains(filterPattern)){
+                        suggestions.add(item);
+                    }
+                }
+            }
+            results.values = suggestions;
+            results.count = suggestions.size();
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            clear();
+            addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public CharSequence convertResultToString(Object resultValue) {
+            return ((Item) resultValue).getName();
+        }
+    };
 }
