@@ -9,11 +9,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.mystore.adapter.StoreListAdapter;
+import com.example.mystore.model.Item;
 import com.example.mystore.model.StoreModel;
 import com.google.gson.Gson;
 
@@ -24,6 +26,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity  implements StoreListAdapter.StoreModelListClickListener {
+
+    private List<Item> ItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,12 @@ public class MainActivity extends AppCompatActivity  implements StoreListAdapter
 
         initRecycleView(storeModelList);
 
+        fillItemList(storeModelList);
+
+        AutoCompleteTextView editText = findViewById(R.id.autoComplete);
+        AutoCompleteItemAdapter adapter = new AutoCompleteItemAdapter(this, ItemList);
+        editText.setAdapter(adapter);
+
         TextView viewMapButton = findViewById(R.id.viewMapButton);
         viewMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +57,17 @@ public class MainActivity extends AppCompatActivity  implements StoreListAdapter
                 startActivityForResult(mapIntent, 1000);
             }
         });
+    }
+
+    private void fillItemList(List<StoreModel> storeModelList) {
+        ItemList = new ArrayList<>();
+        for (int i = 0; i < storeModelList.size(); i++)
+        {
+            for (int j = 0; j < storeModelList.get(i).getItems().size(); j++)
+            {
+                ItemList.add(storeModelList.get(i).getItems().get(j));
+            }
+        }
     }
 
     private void initRecycleView(List<StoreModel> storeModelList) {
