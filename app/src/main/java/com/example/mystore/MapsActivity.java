@@ -40,6 +40,7 @@ public class MapsActivity extends AppCompatActivity implements
         assert actionBar != null;
         actionBar.setTitle("Map view of Store");
         actionBar.setDisplayHomeAsUpEnabled(true);
+
 //        actionBar.setHomeButtonEnabled(true);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -86,6 +87,7 @@ public class MapsActivity extends AppCompatActivity implements
             LatLng location = new LatLng(Double.parseDouble(latlng[0]), Double.parseDouble(latlng[1]));
             marker = mMap.addMarker(new MarkerOptions().position(location).title(String.valueOf(storeModelList.get(i).getName())));
             marker.setTag(storeModelList.get(i));
+            marker.showInfoWindow();
         }
 
     }

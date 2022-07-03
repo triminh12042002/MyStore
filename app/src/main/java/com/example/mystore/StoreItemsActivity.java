@@ -48,8 +48,8 @@ public class StoreItemsActivity extends AppCompatActivity implements ItemListAda
         viewCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(itemInCartList != null && itemInCartList.size() <= 0){
-                    Toast.makeText(StoreItemsActivity.this, "please add some items to cart", Toast.LENGTH_SHORT);
+                if(itemInCartList == null || itemInCartList.size() <= 0){
+                    Toast.makeText(StoreItemsActivity.this, "please add some items to cart", Toast.LENGTH_LONG);
                     return;
                 }
                 storeModel.setItems(itemInCartList);
