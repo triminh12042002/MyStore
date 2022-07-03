@@ -136,4 +136,10 @@ public class StoreItemsActivity extends AppCompatActivity implements ItemListAda
             finish();
         }
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(Activity.RESULT_CANCELED);
+        finish();
+    }
 }

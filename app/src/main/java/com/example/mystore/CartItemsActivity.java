@@ -27,7 +27,6 @@ public class CartItemsActivity extends AppCompatActivity {
         actionBar.setSubtitle(storeModel.getAddress());
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-
         initRecyclerView(storeModel);
     }
 

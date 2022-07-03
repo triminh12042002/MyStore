@@ -2,7 +2,7 @@
     {
         "name":"Store 1",
         "address":"1 A Street",
-        "position": "10.7400324,106.5921973",
+        "position": "10.7624736,106.6822696",
         "image":"https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8",
         "items":[
             {
@@ -20,7 +20,7 @@
     {
         "name":"Store 2",
         "address":"2 B Street",
-        "position": "10.7464412,106.6177748",
+        "position": "10.7637213,106.6820202",
         "image":"https://images.unsplash.com/photo-1583639178752-6952f32692c2",
         "items":[
             {
@@ -36,9 +36,9 @@
         ]
     },
     {
-        "name":"Store 2",
-        "address":"2 B Street",
-        "position": "10.7464412,106.6177748",
+        "name":"Store 4",
+        "address":"4 B Street",
+        "position": "10.7641034,106.6823031",
         "image":"https://images.unsplash.com/photo-1547458095-8642c575ed1a",
         "items":[
             {

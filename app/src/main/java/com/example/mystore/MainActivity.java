@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.mystore.adapter.StoreListAdapter;
@@ -16,6 +19,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,7 +37,16 @@ public class MainActivity extends AppCompatActivity  implements StoreListAdapter
 
         initRecycleView(storeModelList);
 
-
+        TextView viewMapButton = findViewById(R.id.viewMapButton);
+        viewMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mapIntent = new Intent(MainActivity.this, MapsActivity.class);
+                ArrayList<StoreModel> storeModelArrayList = new ArrayList<>(storeModelList);
+                mapIntent.putParcelableArrayListExtra("StoreModelList", storeModelArrayList);
+                startActivityForResult(mapIntent, 1000);
+            }
+        });
     }
 
     private void initRecycleView(List<StoreModel> storeModelList) {
