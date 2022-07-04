@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -27,8 +29,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity  implements StoreListAdapter.StoreModelListClickListener {
 
-    private List<Item> ItemList;
-
+    private List<Item> fillItemList;
+    private StoreListAdapter adapter;
+    private List<StoreModel> storeModelList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,19 +40,30 @@ public class MainActivity extends AppCompatActivity  implements StoreListAdapter
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Store List");
 
-        List<StoreModel> storeModelList = getStoreData();
+        storeModelList = getStoreData();
 
         initRecycleView(storeModelList);
 
         fillItemList(storeModelList);
         AutoCompleteTextView editText = findViewById(R.id.autoComplete);
-        AutoCompleteItemAdapter adapter = new AutoCompleteItemAdapter(this, ItemList);
-        editText.setAdapter(adapter);
+        AutoCompleteItemAdapter searchAdapter = new AutoCompleteItemAdapter(this, fillItemList);
+        editText.setAdapter(searchAdapter);
 
         // get input string from search bar
-        String input = editText.getText().toString();
+        //String input = editText.getText().toString();
         //get stores after searching
-        ArrayList<StoreModel> searchedStores = StoreModelSearch(input, storeModelList);
+       // ArrayList<StoreModel> searchedStores = StoreModelSearch(input, storeModelList);
+
+        TextView searchButton = findViewById(R.id.searchButton);
+       searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // get input string from search bar
+                String input = editText.getText().toString();
+                ArrayList<StoreModel> temp = StoreModelSearch(input, storeModelList);
+                adapter.updateData(temp);
+            }
+        });
 
         TextView viewMapButton = findViewById(R.id.viewMapButton);
         viewMapButton.setOnClickListener(new View.OnClickListener() {
@@ -67,31 +81,31 @@ public class MainActivity extends AppCompatActivity  implements StoreListAdapter
         ArrayList<StoreModel> searchedStores = new ArrayList<>();
         for (int i = 0; i < storeModelList.size(); i++)
             for (int j = 0; j < storeModelList.get(i).getItems().size(); j++)
-                if (input == storeModelList.get(i).getItems().get(j).getName())
+            {
+                Log.v("item name", "item name" + storeModelList.get(i).getItems().get(j).getName()) ;
+                if (input.equals(storeModelList.get(i).getItems().get(j).getName()))
+                {
                     searchedStores.add(storeModelList.get(i));
+                    break;
+                }
+            }
+
 
         return searchedStores;
     }
 
     private void fillItemList(List<StoreModel> storeModelList) {
-        ItemList = new ArrayList<>();
+        fillItemList = new ArrayList<>();
         for (int i = 0; i < storeModelList.size(); i++)
-
             for (int j = 0; j < storeModelList.get(i).getItems().size(); j++)
-
-                for (int k = 0; k < ItemList.size(); k++)
-                    if (ItemList.get(k).getName() == storeModelList.get(i).getItems().get(j).getName())
-                        ItemList.add(storeModelList.get(i).getItems().get(j));
+                        fillItemList.add(storeModelList.get(i).getItems().get(j));
     }
-
-
 
     private void initRecycleView(List<StoreModel> storeModelList) {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        StoreListAdapter adapter = new StoreListAdapter(storeModelList, this);
+        adapter = new StoreListAdapter(storeModelList, this);
         recyclerView.setAdapter(adapter);
-
     }
 
     private List<StoreModel> getStoreData() {
@@ -121,4 +135,11 @@ public class MainActivity extends AppCompatActivity  implements StoreListAdapter
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        //setResult(Activity.RESULT_CANCELED);
+        adapter.updateData(storeModelList);
+        //finish();
+    }
 }
