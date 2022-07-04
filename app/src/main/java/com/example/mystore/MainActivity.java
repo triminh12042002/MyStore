@@ -42,10 +42,14 @@ public class MainActivity extends AppCompatActivity  implements StoreListAdapter
         initRecycleView(storeModelList);
 
         fillItemList(storeModelList);
-
         AutoCompleteTextView editText = findViewById(R.id.autoComplete);
         AutoCompleteItemAdapter adapter = new AutoCompleteItemAdapter(this, ItemList);
         editText.setAdapter(adapter);
+
+        // get input string from search bar
+        String input = editText.getText().toString();
+        //get stores after searching
+        ArrayList<StoreModel> searchedStores = StoreModelSearch(input, storeModelList);
 
         TextView viewMapButton = findViewById(R.id.viewMapButton);
         viewMapButton.setOnClickListener(new View.OnClickListener() {
@@ -59,16 +63,28 @@ public class MainActivity extends AppCompatActivity  implements StoreListAdapter
         });
     }
 
+    private ArrayList<StoreModel> StoreModelSearch(String input, List<StoreModel> storeModelList) {
+        ArrayList<StoreModel> searchedStores = new ArrayList<>();
+        for (int i = 0; i < storeModelList.size(); i++)
+            for (int j = 0; j < storeModelList.get(i).getItems().size(); j++)
+                if (input == storeModelList.get(i).getItems().get(j).getName())
+                    searchedStores.add(storeModelList.get(i));
+
+        return searchedStores;
+    }
+
     private void fillItemList(List<StoreModel> storeModelList) {
         ItemList = new ArrayList<>();
         for (int i = 0; i < storeModelList.size(); i++)
-        {
+
             for (int j = 0; j < storeModelList.get(i).getItems().size(); j++)
-            {
-                ItemList.add(storeModelList.get(i).getItems().get(j));
-            }
-        }
+
+                for (int k = 0; k < ItemList.size(); k++)
+                    if (ItemList.get(k).getName() == storeModelList.get(i).getItems().get(j).getName())
+                        ItemList.add(storeModelList.get(i).getItems().get(j));
     }
+
+
 
     private void initRecycleView(List<StoreModel> storeModelList) {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
