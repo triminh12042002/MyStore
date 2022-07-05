@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyStore">
-
+        <activity
+            android:name=".ItemActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -27,6 +29,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA9dMn3so0ugsGY-TmHXLGfvjbX3cv61-E" />
+
         <activity
             android:name=".MapsActivity"
             android:exported="true"

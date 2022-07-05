@@ -3,6 +3,7 @@ package com.example.mystore;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -66,7 +67,7 @@ public class MapsActivity extends AppCompatActivity implements
 
         mMap = googleMap;
         LatLng hcmus = new LatLng(10.7623016,106.67942);
-        float zoomLevel = 15;
+        float zoomLevel = 11;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hcmus,zoomLevel));
         mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
         MarkerOptions markerOptions = new MarkerOptions()
@@ -116,6 +117,16 @@ public class MapsActivity extends AppCompatActivity implements
             marker.remove();
         }
         return false;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                finish();
+            default:
+                // do nothing
+        }
+        return super.onOptionsItemSelected(item);
     }
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

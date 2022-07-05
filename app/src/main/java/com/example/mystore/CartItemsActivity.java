@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.mystore.adapter.CartItemsAdapter;
+import com.example.mystore.model.Item;
 import com.example.mystore.model.StoreModel;
 
 public class CartItemsActivity extends AppCompatActivity {
@@ -27,6 +29,8 @@ public class CartItemsActivity extends AppCompatActivity {
         actionBar.setSubtitle(storeModel.getAddress());
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        TextView cartTitle = findViewById(R.id.cartTitle);
+        cartTitle.setText("Total: " + storeModel.getItems().size() + " items,  $" + calcTotalPrice(storeModel));
         initRecyclerView(storeModel);
     }
 
@@ -37,6 +41,13 @@ public class CartItemsActivity extends AppCompatActivity {
         cartItemsRecycleView.setAdapter(cartItemsAdapter);
     }
 
+    private float calcTotalPrice(StoreModel storeModel){
+        float total = 0;
+        for(Item i : storeModel.getItems()){
+            total += i.getNumInCart()*i.getPrice();
+        }
+        return total;
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
