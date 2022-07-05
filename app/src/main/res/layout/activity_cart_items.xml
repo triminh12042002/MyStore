@@ -5,6 +5,7 @@
     tools:context=".CartItemsActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#e6e6fa"
     >
     <TextView
         android:id="@+id/cartTitle"
@@ -14,7 +15,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="10dp"
-        android:text="Your Cart"/>
+        android:text="Your Cart"
+        android:textSize="30dp"
+        android:textStyle="bold"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartItemsRecycleView"
         android:layout_width="match_parent"
