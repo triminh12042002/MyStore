@@ -42,7 +42,7 @@ public class CartItemsAdapter extends RecyclerView.Adapter<CartItemsAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHoler holder, @SuppressLint("RecyclerView") int position) {
         holder.itemName.setText( itemList.get(position).getName());
-        holder.itemPrice.setText("Price: " + itemList.get(position).getPrice());
+        holder.itemPrice.setText("Price: $" + itemList.get(position).getPrice() + "/Ounce " );
         holder.itemNum.setText("Quantity: " + itemList.get(position).getNumInCart());
 
 

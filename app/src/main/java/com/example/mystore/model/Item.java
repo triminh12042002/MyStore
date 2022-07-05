@@ -7,6 +7,16 @@ public class Item implements Parcelable {
     private String name;
     private float price;
     private int numInCart;
+    private String details;
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
     private String url;
 
     public String getName() {
@@ -37,6 +47,7 @@ public class Item implements Parcelable {
         name = in.readString();
         price = in.readFloat();
         url = in.readString();
+        details = in.readString();
         numInCart = in.readInt();
     }
 
@@ -62,6 +73,7 @@ public class Item implements Parcelable {
         dest.writeString(name);
         dest.writeFloat(price);
         dest.writeString(url);
+        dest.writeString(details);
         dest.writeInt(numInCart);
     }
 

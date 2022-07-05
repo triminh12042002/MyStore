@@ -117,6 +117,13 @@ public class StoreItemsActivity extends AppCompatActivity implements ItemListAda
     }
 
     @Override
+    public void onViewItemDetail(Item item) {
+        Intent itemIntent = new Intent(StoreItemsActivity.this, ItemActivity.class);
+        itemIntent.putExtra("Item", item);
+        startActivityForResult(itemIntent, 1000);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:

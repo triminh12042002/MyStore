@@ -45,7 +45,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHoler holder, @SuppressLint("RecyclerView") int position) {
         holder.itemName.setText( itemList.get(position).getName());
-        holder.itemPrice.setText("Price: " + itemList.get(position).getPrice());
+        holder.itemPrice.setText("Price: $" + itemList.get(position).getPrice() + "/Ounce ");
         holder.addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +93,12 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.MyView
         Glide.with(holder.thumbImage)
                 .load(itemList.get(position).getUrl())
                 .into(holder.thumbImage);
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.onViewItemDetail(itemList.get(position));
+            }
+        });
     }
 
     @Override
@@ -128,5 +133,6 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.MyView
         public void onAddToCartClick(Item item);
         public void onRemoveFromCartClick(Item item);
         public void onUpdateCartClick(Item item);
+        public void onViewItemDetail(Item item);
     }
 }
