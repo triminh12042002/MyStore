@@ -42,7 +42,7 @@
             android:value="AIzaSyA9dMn3so0ugsGY-TmHXLGfvjbX3cv61-E" />
         <activity
             android:name=".MapsActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/title_activity_maps">
             1de0a22aac7aa82d76011cea1d1d180ae029af58
         </activity>
@@ -54,12 +54,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
         </activity>
     </application>
 
