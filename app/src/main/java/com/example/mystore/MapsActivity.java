@@ -121,7 +121,6 @@ public class MapsActivity extends AppCompatActivity implements
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == 1000 && resultCode == Activity.RESULT_OK){
-
             finish();
         }
     }
